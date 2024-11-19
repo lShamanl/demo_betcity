@@ -1,0 +1,63 @@
+parameters:
+    locale: 'ru'
+    path.src: '%kernel.project_dir%/src'
+    path.root: '%kernel.project_dir%'
+    .container.dumper.inline_factories: true
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    Monolog\Processor\PsrLogMessageProcessor:
+        tags: { name: monolog.processor, handler: sentry }
+
+    Sylius\Component\Grid\DataExtractor\DataExtractorInterface: "@sylius.grid.data_extractor.property_access"
+
+    jms_serializer.naming_strategy:
+        alias: jms_serializer.identical_property_naming_strategy
+
+    Http\Message\Formatter\FullHttpMessageFormatter: ~
+
+    GuzzleHttp\ClientInterface:
+        class: GuzzleHttp\Client
+
+    form.factory:
+        class: Symfony\Component\Form\FormFactory
+        public: true
+
+    Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
+
+    Psr\Container\ContainerInterface: '@service_container'
+
+    session:
+        class: Symfony\Component\HttpFoundation\Session\Session
+        public: true
+
+    security.token_storage:
+        alias: security.untracked_token_storage
+        public: true
+
+    security.authorization_checker:
+        class: Symfony\Component\Security\Core\Authorization\AuthorizationChecker
+        public: true
+
+    Redis:
+        # you can also use \RedisArray, \RedisCluster or \Predis\Client classes
+        class: Redis
+        calls:
+            -   connect:
+                    - '%env(REDIS_HOST)%'
+                    - '%env(int:REDIS_PORT)%'
+            -   auth:
+                    - '%env(REDIS_PASSWORD)%'
+
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+        arguments:
+            - '@Redis'
+            # you can optionally pass an array of options. The only option is 'prefix',
+            # which defines the prefix to use for the keys to avoid collision on the Redis server
+            - { prefix: '%kernel.project_dir%' }
+
+    Symfony\Component\RateLimiter\RateLimiterFactory $anonymousApiCommon: '@limiter.anonymous_api_common'
+    Symfony\Component\RateLimiter\RateLimiterFactory $authenticatedApiCommon: '@limiter.authenticated_api_common'

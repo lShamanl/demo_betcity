@@ -1,0 +1,7 @@
+{% set formattedData = data | number_format(2,'.',',') %}
+
+{% if align is not null %}
+    <div class="{{ align }} aligned">{{ formattedData }}</div>
+{% else %}
+    {{ formattedData }}
+{% endif %}

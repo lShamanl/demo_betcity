@@ -1,0 +1,39 @@
+<div class="ui segment">
+    <table class="ui very1 basic collapsing celled table">
+        <tbody>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.auth.user.properties.id'|trans }}:</strong></td>
+            <td>{{ resource.id }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.auth.user.properties.created_at'|trans }}:</strong></td>
+            <td>{{ resource.createdAt|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.auth.user.properties.updated_at'|trans }}:</strong></td>
+            <td>{{ resource.updatedAt|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.auth.user.properties.email'|trans }}:</strong></td>
+            <td>{{ resource.email }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.auth.user.properties.role'|trans }}:</strong></td>
+            <td>{{ resource.role|trans }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.auth.user.properties.name'|trans }}:</strong></td>
+            <td>{{ resource.name }}</td>
+        </tr>
+        </tbody>
+     </table>
+    <div class="ui buttons">
+        <a href="{{ path("app_auth.user_update", {"id": resource.id} ) }}" class="ui labeled icon button">
+            <i class="pencil icon"></i>
+            {{ 'app.admin.ui.edit' | trans }}
+        </a>
+        {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+        {{ buttons.delete(path("app_auth.user_delete", {"id": resource.id} ), '', true, resource.id) }}
+    </div>
+
+</div>

@@ -1,0 +1,9 @@
+doctrine:
+    orm:
+        mappings:
+            App\Profile:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Profile/Domain'
+                prefix: App\Profile\Domain
+                alias: App_Profile

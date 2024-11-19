@@ -1,0 +1,6 @@
+{% set path = options.link.url|default(path(options.link.route, options.link.parameters)) %}
+
+<a class="ui icon labeled button green" href="{{ path }}" target="_blank">
+    <i class="icon download"></i>
+    {{ action.label|trans }}
+</a>

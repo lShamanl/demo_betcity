@@ -1,0 +1,2 @@
+admin_home:
+    alias: app_auth.user_index

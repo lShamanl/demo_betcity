@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Tests\Integration\:
+        public: true
+        resource: '../tests/Integration/**/*Fixture.php'
+
+    App\Tests\Functional\:
+        public: true
+        resource: '../tests/Functional/**/*Fixture.php'
+
+    Symfony\Component\PasswordHasher\PasswordHasherInterface:
+        class: Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher
+        public: true

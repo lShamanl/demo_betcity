@@ -1,0 +1,70 @@
+sylius_grid:
+    grids:
+        app_profile_betcity:
+            limits:
+                - 25
+                - 50
+                - 100
+                - 250
+                - 500
+            driver:
+                name: doctrine/orm
+                options:
+                    class: '%app.model.profile.betcity.class%'
+            fields:
+                id:
+                    type: twig
+                    label: app.admin.ui.id
+                    options:
+                        template: '@profile/admin/betcity/link-to-show.html.twig'
+                    sortable: ~
+                createdAt:
+                    type: datetime
+                    label: app.admin.ui.modules.profile.betcity.properties.created_at
+                    sortable: ~
+                updatedAt:
+                    type: datetime
+                    label: app.admin.ui.modules.profile.betcity.properties.updated_at
+                    sortable: ~
+                userId:
+                    type: string
+                    label: app.admin.ui.modules.profile.betcity.properties.user_id
+                    sortable: ~
+                name:
+                    type: string
+                    label: app.admin.ui.modules.profile.betcity.properties.name
+                    sortable: ~
+                gender:
+                    type: twig
+                    label: app.admin.ui.modules.profile.betcity.properties.gender
+                    options:
+                        template: '@profile/admin/betcity/enum/gender.html.twig'
+                    sortable: ~
+            sorting:
+                id: desc
+            filters:
+                userId:
+                    type: int
+                    label: app.admin.ui.modules.profile.betcity.properties.user_id
+                    form_options:
+                        label: app.admin.ui.modules.profile.betcity.properties.user_id
+                        type: equal
+                    options:
+                        type: equal
+                name:
+                    type: like
+                    form_options:
+                        field_name: name
+                        label: app.admin.ui.modules.profile.betcity.properties.name
+                gender:
+                    type: select
+                    label: app.admin.ui.modules.profile.betcity.properties.gender
+                    form_options:
+                        choices:
+                            app.admin.ui.modules.profile.betcity.enums.gender.secret: secret
+                            app.admin.ui.modules.profile.betcity.enums.gender.male: male
+                            app.admin.ui.modules.profile.betcity.enums.gender.female: female
+            actions:
+                main:
+                    create:
+                        type: create

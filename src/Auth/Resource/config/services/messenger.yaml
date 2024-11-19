@@ -1,0 +1,15 @@
+framework:
+    messenger:
+        transports:
+            auth-transport:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                retry_strategy:
+                    max_retries: 3
+                    delay: 5000
+                    multiplier: 3
+                options:
+                    exchange:
+                        name: auth
+                    queues:
+                        common: ~
+        routing: {  }

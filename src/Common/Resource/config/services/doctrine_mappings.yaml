@@ -1,0 +1,9 @@
+doctrine:
+    orm:
+        mappings:
+            App\Common\Doctrine:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Common/Doctrine'
+                prefix: App\Common\Doctrine
+                alias: App_Common_Doctrine

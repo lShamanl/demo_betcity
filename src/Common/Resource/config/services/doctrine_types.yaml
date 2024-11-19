@@ -1,0 +1,7 @@
+doctrine:
+    dbal:
+        types:
+            common_measurement: App\Common\Doctrine\Type\MeasurementType
+            common_checkbox: App\Common\Doctrine\Type\CheckboxType
+        mapping_types:
+            common_checkbox: common_checkbox

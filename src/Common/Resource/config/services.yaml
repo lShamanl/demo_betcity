@@ -1,0 +1,32 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    _instanceof:
+        Doctrine\Common\EventSubscriber:
+            tags:
+                name: doctrine.event_subscriber
+                connection: default
+
+    App\Common\:
+        resource: '%kernel.project_dir%/src/Common/'
+        exclude:
+            - '../Resource'
+
+    App\Common\Entry\Http\:
+        resource: '%kernel.project_dir%/src/Common/Entry/Http/'
+        tags: [ 'controller.service_arguments' ]
+
+    App\Common\Service\Core\Flusher: ~
+
+    App\Common\Service\Core\EventDispatcher:
+        class: App\Common\Service\Dispatcher\MessengerEventDispatcher
+
+    Symfony\Component\Serializer\SerializerInterface:
+        factory: [ 'App\Common\Container\SerializerFactory', 'create' ]
+
+    app.menu_builder:
+        class: App\Common\Entry\Http\Admin\Menu\MainMenuBuilder
+        arguments:
+            $factory: "@knp_menu.factory"

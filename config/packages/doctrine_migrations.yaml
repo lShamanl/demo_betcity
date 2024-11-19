@@ -1,0 +1,8 @@
+doctrine_migrations:
+    migrations_paths:
+        'DoctrineMigrations': '%kernel.project_dir%/migrations'
+    custom_template: './src/Common/Doctrine/Template/MigrationTemplate.dist'
+    enable_profiler: '%kernel.debug%'
+    organize_migrations: BY_YEAR_AND_MONTH
+    all_or_nothing: true
+    transactional: true

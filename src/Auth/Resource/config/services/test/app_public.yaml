@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    App\Auth\Domain\User\UserRepository:
+        public: true
+    App\Auth\Domain\User\Service\UserNextIdService:
+        public: true

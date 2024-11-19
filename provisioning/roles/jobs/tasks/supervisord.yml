@@ -1,0 +1,28 @@
+---
+- name: Install supervisord
+  apt:
+    name: supervisor
+    state: present
+
+- name: Start supervisord
+  service:
+    name: supervisor
+    state: started
+
+- name: Create supervisor config for messenger-consume
+  copy:
+    dest: /etc/supervisor/conf.d/messenger_consume.conf
+    content: |
+        [program:messenger_consume]
+        directory=/home/deploy/app
+        command=docker compose -f docker-compose-production.yml run --rm app-php-fpm bin/console messenger:consume common-command-transport --limit=10
+        process_name=%(program_name)s_%(process_num)02d
+        autostart=true
+        autorestart=true
+        user=deploy
+        startsecs=0
+        numprocs=1
+        startretries=3
+
+- name: Update supervisor config
+  command: supervisorctl update

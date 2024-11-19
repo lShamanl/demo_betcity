@@ -1,0 +1,10 @@
+{% extends 'SyliusUiBundle:Macro:labels.html.twig' %}
+
+{% macro icon_label(value, icon, button_color) %}
+    <div class="ui label {{ button_color }}">
+        {% if icon is not empty %}
+            <i class="{{ icon }} icon"></i>
+        {% endif %}
+        {{ value }}
+    </div>
+{% endmacro %}

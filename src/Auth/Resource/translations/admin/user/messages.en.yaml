@@ -1,0 +1,43 @@
+app:
+    admin:
+        ui:
+            auth.users: Users
+            new_auth.user: 'Add User'
+            edit_auth.user: 'Edit User'
+            show_auth.user: User
+            modules:
+                auth:
+                    user:
+                        properties:
+                            id: Id
+                            created_at: CreatedAt
+                            updated_at: UpdatedAt
+                            email: Email
+                            user_roles: UserRoles
+                            password: Password
+                            name: Name
+                        flash:
+                            success: success
+                            email_is_busy: 'email is busy'
+                            user_not_exists: 'user not exists'
+                            error_user_not_exists: User not exists
+                            error_email_is_busy: Email already exists
+                            error_invalid_credentials: Invalid credentials
+                            success_edited: User edited
+                            success_created: User created
+                            success_deleted: User deleted
+                            success_password_was_updated: Password was updated
+                            password_is_short: Password is short
+                            password_is_not_equals: Password is not equals
+                        actions:
+                            password_repeat: Password repeat
+                            change_password: Change password
+                        other_labels:
+                            old_password: Old password
+                        enums:
+                            role:
+                              user: User
+                              admin: Admin
+            menu:
+                auth:
+                    user.list: Users

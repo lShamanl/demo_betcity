@@ -1,0 +1,9 @@
+---
+#- name: Example ansible task
+#  cron:
+#    name: example_custom_command_name
+#    job: 'cd app && docker compose -f docker-compose-production.yml run --rm app-php-fpm php bin/console app:example'
+#    minute: '1'
+#    hour: '10,22'
+#  become: yes
+#  become_user: deploy

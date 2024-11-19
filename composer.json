@@ -1,0 +1,140 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.2",
+        "ext-amqp": "*",
+        "ext-bcmath": "*",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-redis": "*",
+        "doctrine/doctrine-bundle": "^2.7",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.13",
+        "dragonmantank/cron-expression": "^3.3",
+        "firebase/php-jwt": "^6.5",
+        "friendsofsymfony/jsrouting-bundle": "^3.2",
+        "intellect-web-development/measurement": "1.1.*",
+        "intellect-web-development/symfony-doctrine-search-bundle": "^1.0",
+        "intellect-web-development/symfony-entry-contract-bundle": "1.1.0",
+        "liip/imagine-bundle": "^2.8",
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "nelmio/api-doc-bundle": "^4.10",
+        "nelmio/cors-bundle": "^2.3",
+        "pagerfanta/doctrine-orm-adapter": "^3.6",
+        "pagerfanta/twig": "^3.6",
+        "php-http/guzzle7-adapter": "^1.0",
+        "php-http/httplug-bundle": "^1.27",
+        "promphp/prometheus_client_php": "*",
+        "psr/log": "^1.0",
+        "psr/simple-cache": "^2.0",
+        "qossmic/deptrac-shim": "^1.0",
+        "sentry/sentry": "^3.19.1",
+        "sentry/sentry-symfony": "^4.8",
+        "sylius/grid-bundle": "^1.11",
+        "sylius/resource-bundle": "^1.9",
+        "sylius/ui-bundle": "^1.11",
+        "symfony/amqp-messenger": "6.4.*",
+        "symfony/asset": "6.4.*",
+        "symfony/console": "6.4.*",
+        "symfony/debug-bundle": "6.4.*",
+        "symfony/dotenv": "6.4.*",
+        "symfony/flex": "^2",
+        "symfony/framework-bundle": "6.4.*",
+        "symfony/http-client": "6.4.*",
+        "symfony/lock": "6.4.*",
+        "symfony/messenger": "6.4.*",
+        "symfony/mime": "6.4.*",
+        "symfony/monolog-bundle": "^3.8",
+        "symfony/proxy-manager-bridge": "6.4.*",
+        "symfony/rate-limiter": "6.4.*",
+        "symfony/runtime": "6.4.*",
+        "symfony/scheduler": "6.4.*",
+        "symfony/security-bundle": "6.4.*",
+        "symfony/twig-bundle": "6.4.*",
+        "symfony/uid": "6.4.*",
+        "symfony/ux-autocomplete": "^2.7",
+        "symfony/webpack-encore-bundle": "^1.15",
+        "symfony/yaml": "6.4.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "zircote/swagger-php": "^4.5"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true,
+            "symfony/runtime": true,
+            "php-http/discovery": true
+        },
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "6.4.*"
+        }
+    },
+    "require-dev": {
+        "dama/doctrine-test-bundle": "^7.1",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "fakerphp/faker": "^1.20",
+        "friendsofphp/php-cs-fixer": "3.*",
+        "overtrue/phplint": "*",
+        "php-http/vcr-plugin": "^1.2",
+        "phpmetrics/phpmetrics": "^2.8",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpstan/phpstan": "^1.9",
+        "phpunit/phpunit": "^9.5",
+        "psalm/plugin-symfony": "^5.0",
+        "rector/rector": "^0.17.4",
+        "roave/security-advisories": "dev-master",
+        "symfony/browser-kit": "6.4.*",
+        "symfony/css-selector": "6.4.*",
+        "symfony/maker-bundle": "^1.48",
+        "symfony/phpunit-bridge": "6.4.*",
+        "symfony/stopwatch": "6.4.*",
+        "symfony/web-profiler-bundle": "6.4.*"
+    }
+}

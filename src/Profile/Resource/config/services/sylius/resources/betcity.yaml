@@ -1,0 +1,8 @@
+sylius_resource:
+    resources:
+        app.profile.betcity:
+            templates: admin/layout/crud
+            driver: doctrine/orm
+            classes:
+                model: App\Profile\Domain\Betcity\Betcity
+                controller: App\Profile\Entry\Http\Admin\Sylius\Controller\Betcity\BetcityController

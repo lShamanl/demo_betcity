@@ -1,0 +1,39 @@
+<div class="ui segment">
+    <table class="ui very1 basic collapsing celled table">
+        <tbody>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.profile.betcity.properties.id'|trans }}:</strong></td>
+            <td>{{ resource.id }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.profile.betcity.properties.created_at'|trans }}:</strong></td>
+            <td>{{ resource.createdAt|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.profile.betcity.properties.updated_at'|trans }}:</strong></td>
+            <td>{{ resource.updatedAt|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.profile.betcity.properties.user_id'|trans }}:</strong></td>
+            <td>{{ resource.userId }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.profile.betcity.properties.name'|trans }}:</strong></td>
+            <td>{{ resource.name }}</td>
+        </tr>
+        <tr class="item">
+            <td><strong>{{ 'app.admin.ui.modules.profile.betcity.properties.gender'|trans }}:</strong></td>
+            <td>{% include '@profile/admin/betcity/enum/gender.html.twig' with {'data': resource.gender} %}</td>
+        </tr>
+        </tbody>
+     </table>
+    <div class="ui buttons">
+        <a href="{{ path("app_profile.betcity_update", {"id": resource.id} ) }}" class="ui labeled icon button">
+            <i class="pencil icon"></i>
+            {{ 'app.admin.ui.edit' | trans }}
+        </a>
+        {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+        {{ buttons.delete(path("app_profile.betcity_delete", {"id": resource.id} ), '', true, resource.id) }}
+    </div>
+
+</div>

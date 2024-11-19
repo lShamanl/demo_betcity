@@ -1,0 +1,6 @@
+app:
+    admin:
+        ui:
+            menu:
+                auth:
+                    label: Auth

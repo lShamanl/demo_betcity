@@ -1,0 +1,14 @@
+app_profile_betcity:
+    resource: |
+        path: profile/betcities
+        alias: app.profile.betcity
+        only:
+            - index
+            - show
+        redirect: show
+        grid: app_profile_betcity
+        vars:
+            all:
+                templates:
+                    show: '@profile/admin/betcity/show.html.twig'
+    type: sylius.resource

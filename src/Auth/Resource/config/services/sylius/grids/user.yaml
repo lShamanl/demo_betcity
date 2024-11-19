@@ -1,0 +1,53 @@
+sylius_grid:
+    grids:
+        app_auth_user:
+            limits:
+                - 25
+                - 50
+                - 100
+                - 250
+                - 500
+            driver:
+                name: doctrine/orm
+                options:
+                    class: '%app.model.auth.user.class%'
+            fields:
+                id:
+                    type: twig
+                    label: app.admin.ui.id
+                    options:
+                        template: '@auth/admin/user/link-to-show.html.twig'
+                    sortable: ~
+                createdAt:
+                    type: datetime
+                    label: app.admin.ui.modules.auth.user.properties.created_at
+                    sortable: ~
+                updatedAt:
+                    type: datetime
+                    label: app.admin.ui.modules.auth.user.properties.updated_at
+                    sortable: ~
+                email:
+                    type: string
+                    label: app.admin.ui.modules.auth.user.properties.email
+                    sortable: ~
+                name:
+                    type: string
+                    label: app.admin.ui.modules.auth.user.properties.name
+                    sortable: ~
+            sorting:
+                id: desc
+            filters:
+                email:
+                    type: like
+                    form_options:
+                        field_name: email
+                        label: app.admin.ui.modules.auth.user.properties.email
+                name:
+                    type: like
+                    form_options:
+                        field_name: name
+                        label: app.admin.ui.modules.auth.user.properties.name
+            actions:
+                main:
+                    create:
+                        type: create

@@ -1,0 +1,11 @@
+---
+-   name: Install Postgres
+    apt:
+        name: postgresql
+        state: present
+        update_cache: yes
+
+-   name: Add Postgres users
+    user: name={{ item.name }} state=present groups={{ item.groups }}
+    with_items:
+      - { name: 'postgres_root', groups: 'root' }

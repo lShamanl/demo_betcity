@@ -1,0 +1,5 @@
+{% macro crumble(crumbs = {}) %}
+    {% import '@SyliusUi/Macro/breadcrumb.html.twig' as _breadcrumb %}
+
+    {{ _breadcrumb.crumble(crumbs, path('admin_home'), 'sylius.ui.administration'|trans) }}
+{% endmacro %}

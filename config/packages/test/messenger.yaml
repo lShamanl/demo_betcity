@@ -1,0 +1,5 @@
+framework:
+    messenger:
+        transports:
+             common-command-transport: 'in-memory://'
+             sync: 'in-memory://'

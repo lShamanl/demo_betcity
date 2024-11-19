@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    App\Profile\Domain\Betcity\BetcityRepository:
+        public: true
+    App\Profile\Domain\Betcity\Service\BetcityNextIdService:
+        public: true

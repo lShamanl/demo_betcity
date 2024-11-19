@@ -1,0 +1,83 @@
+version: "3.7"
+
+networks:
+  default:
+    name: app-network
+
+services:
+  nginx:
+    build:
+      context: docker
+      dockerfile: development/nginx/Dockerfile
+    volumes:
+      - ./:/app
+
+  app-php-fpm:
+    build:
+      context: docker
+      dockerfile: development/php-fpm/Dockerfile
+    volumes:
+      - ./:/app
+      - app_cache:/var/cache/app
+      - app_log:/var/log/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PHP_IDE_CONFIG: "serverName=app" # Необходимо назвать в Languages & Frameworks -> PHP -> Servers новый сервер как "app"
+      XDEBUG_SESSION: "1"
+
+  app-postgres-db:
+    volumes:
+      - db:/var/lib/postgresql/data
+    image: postgres:13-alpine
+    restart: on-failure
+    environment:
+      POSTGRES_DB: application-db
+      POSTGRES_USER: default
+      POSTGRES_PASSWORD: secret
+
+  node:
+    build: docker/common/node
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./:/app
+
+  app-metrics-sidecar:
+    image: redis:alpine
+
+  redis:
+    image: redis:5
+    volumes:
+      - redis_data:/data
+    restart: on-failure
+    environment:
+      REDIS_PASSWORD: none
+
+  rabbitmq:
+    image: rabbitmq:management
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+
+  prometheus:
+    build: docker/common/metrics/prometheus
+    restart: on-failure
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: on-failure
+
+volumes:
+  db:
+  redis_data:
+  app_cache:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  app_log:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

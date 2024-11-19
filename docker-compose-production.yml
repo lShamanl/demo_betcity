@@ -1,0 +1,87 @@
+version: "3.7"
+
+networks:
+  default:
+    external: true
+    name: app-network
+
+services:
+  nginx:
+    container_name: app-nginx
+    image: ${REGISTRY}/${NAMESPACE}/app-nginx:${IMAGE_TAG}
+    restart: always
+    ports:
+      - "8079:80"
+
+  app-php-fpm:
+    image: ${REGISTRY}/${NAMESPACE}/app-app-php-fpm:${IMAGE_TAG}
+    stop_grace_period: 1440m
+    restart: always
+    volumes:
+      - ./../jwt:/app/config/jwt
+
+  app-postgres-db:
+    container_name: app-postgres-db
+    volumes:
+      - ./../pg_data:/var/lib/postgresql/data
+    image: postgres:13-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: application-db
+      POSTGRES_USER: default
+      POSTGRES_PASSWORD: secret
+
+  rabbitmq:
+    image: rabbitmq:management
+    volumes:
+      - ./../rabbit_data/:/var/lib/rabbitmq/mnesia/
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+
+  app-metrics-sidecar:
+    volumes:
+      - ./../redis_metrics:/data
+    image: redis:alpine
+    restart: always
+
+  redis:
+    image: redis:5
+    volumes:
+      - ./../redis_app:/data
+    restart: always
+    environment:
+      REDIS_PASSWORD: none
+
+  prometheus:
+    image: ${REGISTRY}/${NAMESPACE}/app-metrics-prometheus:${IMAGE_TAG}
+    restart: always
+    volumes:
+      - ./../prometheus:/opt/
+    ports:
+      - "9090:9090"
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+#  alertmanager:
+#    image: prom/alertmanager:latest
+#    container_name: alertmanager
+#    hostname: alertmanager
+#    restart: always
+#    ports:
+#      - "9093:9093"
+
+volumes:
+  grafana-storage:

@@ -1,0 +1,67 @@
+{% extends '@app/admin/layout/crud/show.html.twig' %}
+
+{% block content %}
+    {{ sonata_block_render_event(event_prefix ~ '.before_header', {'resource': resource}) }}
+
+    <div class="ui stackable two column grid">
+        <div class="column">
+            {% include configuration.vars.templates.header_title|default('@app/admin/layout/crud/show/_header_title.html.twig') %}
+            {% include configuration.vars.templates.breadcrumb|default('@app/admin/layout/crud/show/_breadcrumb.html.twig') %}
+
+            {{ sonata_block_render_event(event_prefix ~ '.header', {'resource': resource}) }}
+        </div>
+        <div class="middle aligned column">
+            {% include configuration.vars.templates.toolbar|default('toolbar.html.twig') ignore missing %}
+        </div>
+    </div>
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_header', {'resource': resource}) }}
+
+    {% form_theme mainInfoForm '@app/admin/layout/form.html.twig' %}
+    {% form_theme changePasswordForm '@app/admin/layout/form.html.twig' %}
+
+    <div class="ui segment">
+        <h4 class="ui header">{{ 'app.admin.ui.edit'|trans }}</h4>
+        <div class="ui divider"></div>
+        {{ form_start(mainInfoForm, {'attr': {'id': 'mainInfo', 'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        <div class="two fields">
+            {{ form_row(mainInfoForm.name) }}
+            {{ form_row(mainInfoForm.email) }}
+        </div>
+        {{ form_row(mainInfoForm._token) }}
+        <div class="ui buttons">
+            <button type="submit" form="mainInfo" class="ui labeled icon primary button">
+                <i class="save icon"></i>
+                {{ 'app.admin.ui.common.save'|trans }}
+            </button>
+        </div>
+        {{ form_end(mainInfoForm, {'render_rest': false}) }}
+    </div>
+
+    <div class="ui segment">
+        <h4 class="ui header">{{ 'app.admin.ui.modules.auth.user.actions.change_password'|trans }}</h4>
+        <div class="ui divider"></div>
+        {{ form_start(changePasswordForm, {'attr': {'id': 'changePassword', 'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        <div class="three fields">
+            {{ form_row(changePasswordForm.oldPassword) }}
+            {{ form_row(changePasswordForm.plainPassword) }}
+        </div>
+        {{ form_row(changePasswordForm._token) }}
+        <div class="ui buttons">
+            <button type="submit" form="changePassword" class="ui labeled icon primary button">
+                <i class="save icon"></i>
+                {{ 'app.admin.ui.common.save'|trans }}
+            </button>
+        </div>
+        {{ form_end(changePasswordForm, {'render_rest': false}) }}
+    </div>
+
+    <div class="ui segment">
+        <p>JWT:</p>
+        <p style="word-break: break-all;">
+            {{ accessToken }}
+        </p>
+    </div>
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_content', {'resource': resource}) }}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% if data is not null %}
+    {% if (data.id is defined) %}
+        <a class="ui labeled icon" href="{{ path('app_auth.user_show', {'id': data.id}) }}"><i class="linkify icon"></i>{{ data.email }}</a>
+    {% else %}
+        <a class="ui labeled icon" href="{{ path('app_auth.user_show', {'id': data}) }}"><i class="linkify icon"></i>{{ data }}</a>
+    {% endif %}
+{% endif %}

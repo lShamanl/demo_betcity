@@ -1,0 +1,6 @@
+---
+-   name: Provision manager
+    hosts: all
+    remote_user: root
+    roles:
+      - jwt

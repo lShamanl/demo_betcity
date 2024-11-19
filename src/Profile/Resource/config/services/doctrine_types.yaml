@@ -1,0 +1,7 @@
+doctrine:
+    dbal:
+        types:
+            profile_betcity_id: App\Profile\Domain\Betcity\Type\BetcityIdType
+            profile_gender: App\Profile\Domain\Betcity\Type\GenderType
+        mapping_types:
+            profile_gender: profile_gender

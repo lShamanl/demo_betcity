@@ -1,0 +1,3 @@
+profile_http:
+    resource: ../../../../../src/Profile/Entry/Http/
+    type: annotation

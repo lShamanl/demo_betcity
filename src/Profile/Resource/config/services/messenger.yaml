@@ -1,0 +1,16 @@
+framework:
+    messenger:
+        transports:
+            profile-transport:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy:
+                    max_retries: 3
+                    delay: 5000
+                    multiplier: 3
+                options:
+                    exchange:
+                        name: profile
+                        type: direct
+                    queues:
+                        profile: '~'
+        routing: {  }

@@ -1,0 +1,19 @@
+admin_login:
+    path: "/login"
+    methods: [GET]
+    defaults:
+        _controller: "sylius.controller.security::loginAction"
+        _sylius:
+            template: "@app/admin/security/login.html.twig"
+#            permission: true
+            logged_in_route: admin_home
+
+admin_login_check:
+    path: "/login_check"
+    methods: [POST]
+    defaults:
+        _controller: SyliusUiBundle:Security:check
+
+admin_logout:
+    path: "/logout"
+    methods: [GET]

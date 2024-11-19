@@ -1,0 +1,16 @@
+parameters:
+  paths: ['./src']
+  exclude_files:
+    - '#.*\/src\/.*\/Infrastructure\/Adapter\/.*#'
+
+  layers:
+    - {name: Domain, collectors: [{type: directory, regex: '/src/(?:\w+/)+Domain/.*'}]}
+    - {name: Application, collectors: [{type: directory, regex: '/src/(?:\w+/)+Application/.*'}]}
+    - {name: Entry, collectors: [{type: directory, regex: '/src/(?:\w+/)+Entry/.*'}]}
+    - {name: Infrastructure, collectors: [{type: directory, regex: '/src/(?:\w+/)+Infrastructure/.*'}]}
+
+  ruleset:
+    Domain: null
+    Infrastructure: ['Domain']
+    Application: ['Domain', 'Infrastructure']
+    Entry: ['Domain', 'Infrastructure', 'Application']

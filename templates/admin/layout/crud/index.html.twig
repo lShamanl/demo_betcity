@@ -1,0 +1,52 @@
+{% extends '@app/admin/layout/sylius.html.twig' %}
+
+{% set definition = resources.definition %}
+{% set data = resources.data %}
+{% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.index' %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.admin.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    {{ sonata_block_render_event(event_prefix ~ '.before_header', {'resources': resources}) }}
+
+    <div class="ui stackable two column grid">
+        <div class="column">
+            {% include configuration.vars.templates.header_title|default('@app/admin/layout/crud/index/_header_title.html.twig') %}
+            {% include configuration.vars.templates.breadcrumb|default('@app/admin/layout/crud/index/_breadcrumb.html.twig') %}
+
+            {{ sonata_block_render_event(event_prefix ~ '.header', {'resources': resources}) }}
+        </div>
+
+        <div class="middle aligned column">
+            <div class="ui right floated buttons">
+                {% if definition.actionGroups.main is defined %}
+                    {% for action in definition.getEnabledActions('main') %}
+                        {{ sylius_grid_render_action(resources, action, null) }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+	{% block before_events %}{% endblock %}
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_header', {'resources': resources}) }}
+
+    {{ sylius_grid_render(resources, '@app/admin/layout/crud/grid.html.twig') }}
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_content', {'resources': resources}) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ sonata_block_render_event(event_prefix ~ '.stylesheets') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ sonata_block_render_event(event_prefix ~ '.javascripts') }}
+{% endblock %}

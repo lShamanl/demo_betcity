@@ -1,0 +1,15 @@
+---
+- name: Create JWT directory
+  become: true
+  become_user: deploy
+  file:
+    path: /home/deploy/jwt
+    state: directory
+    mode: '0755'
+
+- name: Generate JWT key pair
+  ansible.builtin.shell: |
+    ssh-keygen -t rsa -b 4096 -N "" -m PEM -f /home/deploy/jwt/jwtRS256.key
+    openssl rsa -in /home/deploy/jwt/jwtRS256.key -pubout -outform PEM -out /home/deploy/jwt/jwtRS256.key.pub
+  args:
+    creates: "/home/deploy/jwt/jwtRS256.key"

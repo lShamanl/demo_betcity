@@ -1,0 +1,34 @@
+app:
+    admin:
+        ui:
+            profile.betcities: Betcities
+            new_profile.betcity: 'Add Betcity'
+            edit_profile.betcity: 'Edit Betcity'
+            show_profile.betcity: Betcity
+            modules:
+                profile:
+                    betcity:
+                        properties:
+                            id: Id
+                            created_at: CreatedAt
+                            updated_at: UpdatedAt
+                            user_id: UserId
+                            name: Name
+                            gender: Gender
+                        enums:
+                            gender:
+                                secret: secret
+                                male: male
+                                female: female
+                        enum_colors:
+                            gender:
+                                secret: blue
+                                male: blue
+                                female: blue
+                        flash: {  }
+                        relations: {  }
+                        actions: {  }
+                        other_labels: {  }
+            menu:
+                profile:
+                    betcity.list: Betcities

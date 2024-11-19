@@ -1,0 +1,22 @@
+sylius:
+  ui:
+    administration: Главная
+app:
+    admin:
+        ui:
+            id: Id
+            edit: Редактировать
+            common:
+                project: Skeleton
+                repeat: Повторить
+                save: Сохранить
+                login: Войти
+                create: Создать
+                remove: Удалить
+                yes_label: Да
+                no_label: Нет
+                download: Cкачать
+                show: Показать
+                details: Детали
+                none: Не выбрано
+                actions: Действия

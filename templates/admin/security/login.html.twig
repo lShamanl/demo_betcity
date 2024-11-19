@@ -1,0 +1,63 @@
+{% extends '@SyliusUi/Layout/centered.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.administration_panel_login'|trans }} | {{ 'app.admin.ui.common.project'|trans }} {% endblock %}
+
+{% block metatags %}
+    {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+{% endblock %}
+
+{% block content %}
+    {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+
+    {{ sonata_block_render_event('sylius.admin.login.before_content', {'form': form}) }}
+
+    {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            {{ sylius_template_event('sylius.admin.login.before_form', {'form': form}) }}
+
+            {% if paths.logo is defined %}
+                <div style="max-width: 270px; margin: 0 auto; margin-bottom: 40px;">
+                    <img src="{{ asset(paths.logo) }}" class="ui fluid image" id="logo">
+                </div>
+            {% endif %}
+
+            {% if last_error %}
+                <div class="ui left aligned basic segment">
+                    {{ messages.error(last_error.messageKey) }}
+                </div>
+            {% endif %}
+
+            {{ form_start(form, {'action': path('admin_login_check'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+            <div class="ui left aligned very padded segment">
+                {{ form_row(form._username, {'value': last_username|default('')}) }}
+                {{ form_row(form._password) }}
+
+                <div class="ui two column grid">
+                    <div class="column">
+                        {{ form_row(form._remember_me) }}
+                    </div>
+                </div>
+
+                <input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">
+                <button type="submit" class="ui fluid large primary submit button">{{ 'app.admin.ui.common.login' | trans }}</button>
+            </div>
+
+            {{ sylius_template_event('sylius.admin.login.form', {'form': form}) }}
+
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
+
+    {{ sonata_block_render_event('sylius.admin.login.after_content', {'form': form}) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}

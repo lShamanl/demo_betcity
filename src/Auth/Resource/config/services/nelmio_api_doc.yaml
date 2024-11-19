@@ -1,0 +1,12 @@
+nelmio_api_doc:
+    areas:
+        default:
+            path_patterns:
+                - ^/api/auth
+                - ^/api/token
+
+    models:
+        names:
+            - { alias: Auth | Token | Authentication | InputContract, type: App\Auth\Entry\Http\Token\Authentication\InputContract }
+            - { alias: Auth | Token | Refresh | InputContract, type: App\Auth\Entry\Http\Token\Refresh\InputContract }
+            - { alias: Auth | Token | InvalidateRefreshToken | InputContract, type: App\Auth\Entry\Http\Token\InvalidateRefreshToken\InputContract }

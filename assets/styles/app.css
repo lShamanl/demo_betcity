@@ -1,0 +1,125 @@
+.ts-wrapper:not(.form-control):not(.form-select) {
+    width: 100% !important;
+}
+
+.ui.vertical.menu {
+    background: #1d1d1d;
+}
+
+@media only screen and (max-width: 992px) {
+    .table.ui.sortable:not(.unstackable) tfoot, .table.ui.sortable:not(.unstackable) thead {
+        display: none;
+    }
+
+    .table.ui.sortable tr td {
+        padding: 8px !important;
+    }
+
+    .table.ui.sortable tr td:not(.batch-actions-selector) {
+        position: relative !important;
+        line-height: 20px;
+        display: flex !important;
+        padding: 0 !important;
+    }
+
+    .table.ui.sortable tbody, .table.ui.sortable tbody td, .table.ui.sortable tbody tr {
+        display: block;
+    }
+
+    .table.ui.sortable tbody td {
+        border: none !important;
+        border-bottom: 1px solid rgba(34, 36, 38, .1) !important;
+    }
+
+    .table.ui.sortable tbody td:last-child {
+        border-bottom: none !important;
+    }
+
+    .table.ui.sortable tbody tr {
+        margin-bottom: 30px;
+        box-shadow: none !important;
+    }
+
+    .table.ui.sortable td:not(.batch-actions-selector):before {
+        content: attr(data-label);
+        font-weight: 500;
+        padding: 8px;
+        display: block;
+        width: 40%;
+        flex-shrink: 0;
+    }
+
+    .td-text {
+        flex-grow: 1;
+        display: block;
+        padding: 8px;
+    }
+
+    .table.ui.sortable tr td.td-actions:not(.batch-actions-selector) {
+        padding: 8px !important;
+    }
+
+    .table.ui.sortable tr td.td-actions:not(.batch-actions-selector) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .td-actions:before {
+        display: none !important;
+    }
+
+    .td-actions .td-text {
+        width: auto;
+    }
+
+    .table.ui.sortable tr {
+        background: #fff;
+        border: 1px solid rgba(34, 36, 38, .15);
+        border-radius: 0.28571429rem;
+        -webkit-box-shadow: 0 1px 2px 0 rgb(34 36 38 / 15%);
+        box-shadow: 0 1px 2px 0 rgb(34 36 38 / 15%);
+        margin: 1rem 0;
+        padding: 1em;
+        position: relative;
+    }
+
+    .ui.segment {
+        background: none;
+        border: none;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        margin: 1rem 0;
+        padding: 0;
+        position: relative;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #wrapper::before {
+        background-position-x: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    #wrapper::before {
+        background-position: 100% 100% !important;
+        background-size: 90px !important;
+    }
+}
+
+.money {
+    text-align: right !important;
+}
+
+.status-sync {
+    background-color: lightcoral;
+}
+
+.status-withdrawal {
+    background-color: lightyellow;
+}
+
+.status-rest {
+    background-color: #dcdcdc;
+}

@@ -1,0 +1,81 @@
+security:
+    enable_authenticator_manager: true
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Auth\Domain\User\User:
+            algorithm: auto
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Auth\Domain\User\User
+                property: email
+        api:
+            id: App\Auth\Infrastructure\Security\UserProvider
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        token_invalidate_all_refresh:
+            security: true
+            pattern: ^/api/token/invalidate-all-refresh-tokens
+            stateless: true
+            provider: api
+            user_checker: App\Auth\Infrastructure\Security\ClientChecker
+            custom_authenticators:
+                - App\Auth\Infrastructure\Security\TokenAuthenticator
+
+        api_info:
+            security: false
+            pattern: ^/api/info
+            stateless: true
+
+        token:
+            security: false
+            pattern: ^/api/token
+            stateless: true
+
+        client:
+            security: true
+            pattern: ^/api/client
+            provider: api
+            stateless: true
+            user_checker: App\Auth\Infrastructure\Security\ClientChecker
+            custom_authenticators:
+                - App\Auth\Infrastructure\Security\TokenAuthenticator
+
+        admin:
+            security: true
+            pattern: ^/api/admin
+            stateless: true
+            provider: api
+            user_checker: App\Auth\Infrastructure\Security\AdminChecker
+            custom_authenticators:
+                - App\Auth\Infrastructure\Security\TokenAuthenticator
+
+        main:
+            pattern: '^/'
+            lazy: true
+            provider: app_user_provider
+            form_login:
+                login_path: admin_login
+                check_path: admin_login_check
+                failure_path: admin_login
+                default_target_path: admin_home
+                use_forward: true
+                use_referer: true
+            remember_me:
+                secret: "%kernel.secret%"
+                name: APP_ADMIN_REMEMBER_ME
+                lifetime: 86400
+                remember_me_parameter: _remember_me
+            logout:
+                path: admin_logout
+                target: admin_login
+    access_control:
+        - { path: ^/api/admin, roles: ROLE_ADMIN }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/metrics, roles: PUBLIC_ACCESS }
+        - { path: ^/logout, roles: ROLE_ADMIN }
+        - { path: ^/$, roles: [ROLE_ADMIN] }
+        - { path: ^/, roles: [ROLE_ADMIN] }

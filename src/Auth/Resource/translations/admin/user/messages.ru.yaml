@@ -1,0 +1,41 @@
+app:
+    admin:
+        ui:
+            auth.users: Пользователи
+            new_auth.user: Добавить пользователя
+            edit_auth.user: Редактировать пользователя
+            show_auth.user: Пользователь
+            modules:
+                auth:
+                    user:
+                        properties:
+                            id: ID
+                            created_at: Дата создания
+                            updated_at: Дата обновления
+                            password: Пароль
+                            name: Имя
+                            role: Роль
+                            email: Email
+                        flash:
+                            error_user_not_exists: Пользователь не существует
+                            error_email_is_busy: Email уже используется
+                            error_invalid_credentials: Недействительные учетные данные
+                            success_edited: Пользователь изменен
+                            success_created: Пользователь создан
+                            success_deleted: Пользователь удален
+                            success_password_was_updated: Пароль успешно изменен
+                            success_authentication: Успешный вход в систему
+                            password_is_short: Пароль слишком короткий
+                            password_is_not_equals: Пароли не совпадают
+                        actions:
+                            password_repeat: Повторите пароль
+                            change_password: Изменить пароль
+                        other_labels:
+                            old_password: Старый пароль
+                        enums:
+                            role:
+                              user: Пользователь
+                              admin: Администратор
+            menu:
+                auth:
+                    user.list: Пользователи

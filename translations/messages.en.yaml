@@ -1,0 +1,21 @@
+sylius:
+  ui:
+    administration: Main
+app:
+    admin:
+        ui:
+            id: Id
+            edit: Edit
+            common:
+                project: Skeleton
+                repeat: Repeat
+                save: Save
+                login: Log in
+                create: Create
+                remove: Remove
+                yes_label: 'Yes'
+                no_label: 'No'
+                download: Download
+                show: Show
+                details: Details
+                none: None choiced

@@ -1,0 +1,11 @@
+.env.local
+.git
+.gitignore
+.php-cs-fixer.cache
+/.idea
+/.deploy
+/vendor
+/node_modules
+/var/cache/*
+/var/log/*
+/var/test/*

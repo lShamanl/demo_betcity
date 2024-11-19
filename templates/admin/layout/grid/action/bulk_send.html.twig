@@ -1,0 +1,11 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% set path = options.link.url|default(path(options.link.route)) %}
+
+<form action="{{ path }}" method="post">
+    <input type="hidden" name="_method" value="POST">
+    <button class="ui primary labeled icon button" type="submit" data-bulk-action-requires-confirmation disabled>
+        <i class="icon paper plane"></i> {{ action.label|trans }}
+    </button>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('change_state') }}" />
+</form>

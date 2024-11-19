@@ -1,0 +1,7 @@
+{% import '@app/admin/layout/macro/labels.html.twig' as labels %}
+
+{% if data %}
+    {{ labels.icon_label('app.admin.ui.common.no_label'|trans, null, 'red') }}
+{% else %}
+    {{ labels.icon_label('app.admin.ui.common.yes_label'|trans, null, 'green') }}
+{% endif %}
